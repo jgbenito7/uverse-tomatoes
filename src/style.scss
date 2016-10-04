@@ -1,0 +1,87 @@
+$cyan:#0c343d;
+$cyan4:#45818e;
+
+
+$nav-height:70px;
+$sidebar-width:170px;
+
+.col-*{
+  padding:0px;
+}
+
+
+body{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.logo{
+  position: absolute;
+  left:10px;
+  top:15px;
+  font-size: 25px;
+  color:white;
+}
+
+.navbar{
+  background:$cyan;
+  height:$nav-height;
+}
+
+.navbar-nav{
+  float:right;
+  margin-top:10px;
+}
+
+.left-nav-wrapper{
+  position:absolute;
+  top:$nav-height;
+  left:0;
+  width:$sidebar-width;
+  height: 100%;
+  background: $cyan4;
+}
+
+.right-wrapper{
+  position: absolute;
+  top:$nav-height;
+  left:$sidebar-width;
+  overflow-y: scroll;
+  height:100%;
+  padding:20px;
+}
+
+.movie{
+  padding:20px;
+  background:$cyan;
+  height:60px;
+  margin:5px;
+  color:white;
+}
+
+.side-wrap{
+  padding:0px 10px;
+  width:100%;
+  height:auto;
+  margin-top: 10px;
+}
+
+.side-elem{
+  background:$cyan;
+  padding:10px;
+  transition: background .3s linear;
+  cursor: pointer;
+}
+
+.side-elem:hover{
+  background: black;
+}
+
+.side-elem > a{
+  color:white;
+  text-align:center;
+}
+
+.side-elem > a:hover{
+  text-decoration: none;
+}
