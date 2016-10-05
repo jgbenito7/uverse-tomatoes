@@ -40,7 +40,7 @@ export default class Sidebar extends React.Component {
 
   render() {
     const { location } = this.props;
-    console.log(this.props);
+    //console.log(this.props);
     const navElems = ["All", "Action-Adventure", "Comedy", "Drama", "Foreign Films", "Horror", "Independent", "Kids-Family", "Romance", "SciFi-Fantasy", "Suspense-Thriller"]
 
     const mappedNav = navElems.map(elem =>

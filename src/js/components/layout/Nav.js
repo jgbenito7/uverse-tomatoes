@@ -15,7 +15,7 @@ export default class Nav extends React.Component {
   }
 
   setActive(value){
-    console.log(this.props.location);
+    //console.log(this.props.location);
     if(this.props.location.pathname == value){
       return "active";
     }else{
@@ -33,7 +33,7 @@ export default class Nav extends React.Component {
     // const settingsClass = location.pathname.match(/^\/settings/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
 
-    console.log(location);
+  //  console.log(location);
 
     return (
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

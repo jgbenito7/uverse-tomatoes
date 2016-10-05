@@ -5,7 +5,8 @@ export default function reducer(state={
     fetched: false,
     error: null,
     category: "All",
-    filter: "Average"
+    filter: "Average",
+    loading: 0
   }, action) {
 
     switch (action.type) {
@@ -35,6 +36,9 @@ export default function reducer(state={
 
       case "SET_FILTER":{
         return {...state,filter:action.payload['filter']}
+      }
+      case "SET_LOADING":{
+        return {...state,loading:action.payload}
       }
     }
 

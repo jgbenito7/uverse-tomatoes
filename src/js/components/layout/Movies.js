@@ -13,7 +13,8 @@ import { setFilter } from "../../actions/movieActions"
     category: store.movies.category,
     fetching: store.movies.fetching,
     fetched: store.movies.fetched,
-    filter: store.movies.filter
+    filter: store.movies.filter,
+    loading: store.movies.loading
   };
 })
 
@@ -46,16 +47,14 @@ export default class Movies extends React.Component {
   }
 
   loader(){
-    console.log(this.props.fetched);
+    //console.log(this.props.fetched);
     var divStyle = {
       backgroundImage: "url('../../../loader.GIF')"
     }
-
-
-
     if(this.props.fetched == false){
       return (
         <div class='centered'>
+          <h1>Sit Tight While Our Ninjas Collect Movie Data...</h1>
           <div class='loader' style={divStyle}></div>
         </div>
       );
@@ -65,7 +64,7 @@ export default class Movies extends React.Component {
   }
 
   render() {
-      const { location,movies, movieData, category, fetching, fetched, filter } = this.props;
+      const { location,movies, movieData, category, fetching, fetched, filter, loading } = this.props;
 
       var mappedMovies = [];
 
@@ -203,16 +202,8 @@ export default class Movies extends React.Component {
       }
 
     return (
-
-
-
-
       <div className="right-wrapper">
-
-
-
         <div class='filter-wrap'>
-
           <div class='filter-by-wrap'>
             <div class='row'>
               <div class='col-xs-3 hide900'>
@@ -230,12 +221,9 @@ export default class Movies extends React.Component {
             </div>
           </div>
         </div>
-
-
         <div class='right-scroll'>
           {this.loader()}
           <div class='row'>
-
             {mappedMovies}
           </div>
         </div>
