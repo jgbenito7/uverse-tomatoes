@@ -45,15 +45,32 @@ export default class Movies extends React.Component {
     $('#myModal' + index).modal('show');
   }
 
+  loader(){
+    console.log(this.props.fetched);
+    var divStyle = {
+      backgroundImage: "url('../../../loader.GIF')"
+    }
+
+
+
+    if(this.props.fetched == false){
+      return (
+        <div class='centered'>
+          <div class='loader' style={divStyle}></div>
+        </div>
+      );
+    }else{
+      return "";
+    }
+  }
+
   render() {
       const { location,movies, movieData, category, fetching, fetched, filter } = this.props;
 
       var mappedMovies = [];
 
       if(!fetching){ //no movie names
-        console.log("No Movies...")
       }else if(!fetched){ //movie names but no data
-        console.log("Movies!!!")
         this.fetchMovieData(movies['movies'],0,movies['movies'].length,[]);
       }else{ //All data is good to go, let's map these suckers
         var mappedMovies = [];
@@ -136,9 +153,11 @@ export default class Movies extends React.Component {
                         <div class='poster' style={ background }></div>
                         <div class='movieInfo'>
                           <h3 class='title'>{movieData[m]['Title']}</h3>
-                          <p>Average Rating: {avgScore}</p>
-                          <p>IMDB Rating: {movieData[m]['imdbRating']}</p>
-                          <p>Metascore: {movieData[m]['Metascore']}</p>
+                          <ul class='score-wrap'>
+                            <li class='scoreCard pink'>{avgScore}</li>
+                            <li class='scoreCard orange'>{movieData[m]['imdbRating']}</li>
+                            <li class='scoreCard blue'>{movieData[m]['Metascore']}</li>
+                          </ul>
                           <p>Rated: {movieData[m]['Rated']}</p>
                           <p>Released: {movieData[m]['Released']}</p>
                           <p>Runtime: {movieData[m]['Runtime']}</p>
@@ -157,7 +176,7 @@ export default class Movies extends React.Component {
                 </div>
               </div>
 
-              <div key={m} class='col-sm-6 col-lg-md-3 col-lg-4' onClick={this.toggleModal.bind(this,m.toString())}>
+              <div key={m} class='col-sm-6 col-md-6 col-lg-4' onClick={this.toggleModal.bind(this,m.toString())}>
                                     <div class='movie'>
                                       <div class='poster' style={ background }></div>
                                       <div class='movieInfo'>
@@ -189,6 +208,9 @@ export default class Movies extends React.Component {
 
 
       <div className="right-wrapper">
+
+
+
         <div class='filter-wrap'>
 
           <div class='filter-by-wrap'>
@@ -200,7 +222,7 @@ export default class Movies extends React.Component {
                 <div class={'filter-button filter-button-l ' + this.activeFilter('Average')} onClick={this.setFilter.bind(this,'Average')}>Average Rating</div>
               </div>
               <div class='col-xs-3'>
-                <div class={'filter-button filter-button-c' + this.activeFilter('IMDB')} onClick={this.setFilter.bind(this,'IMDB')}>IMDB Rating</div>
+                <div class={'filter-button filter-button-c ' + this.activeFilter('IMDB')} onClick={this.setFilter.bind(this,'IMDB')}>IMDB Rating</div>
               </div>
               <div class='col-xs-3'>
                 <div class={'filter-button filter-button-r ' + this.activeFilter('Metascore')} onClick={this.setFilter.bind(this,'Metascore')}>Metascore Rating</div>
@@ -211,7 +233,9 @@ export default class Movies extends React.Component {
 
 
         <div class='right-scroll'>
+          {this.loader()}
           <div class='row'>
+
             {mappedMovies}
           </div>
         </div>

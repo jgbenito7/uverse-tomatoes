@@ -1,1 +1,1 @@
-{"movies": [{"rating": "R", "title": "600 Miles"}, {"rating": "PG", "title": "Boy and the World"}, {"rating": "TV-MA", "title": "Lucha Mexico"}, {"rating": "TV-MA", "title": "Saving Mr. Wu"}], "category": "Foreign Films"}
+{"category": "Foreign Films", "movies": [{"rating": "R", "title": "600 Miles"}, {"rating": "PG", "title": "Boy and the World"}, {"rating": "TV-MA", "title": "Lucha Mexico"}, {"rating": "TV-MA", "title": "Saving Mr. Wu"}]}

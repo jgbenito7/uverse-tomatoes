@@ -21,12 +21,44 @@ $poster-height:280px;
   padding:0px;
 }
 
-.col-xs-3, .col-xs-2,.col-xs-6{
+.col-xs-3, .col-xs-2,.col-xs-6, .col-sm-6, .col-lg-4{
   padding:0px !important;
 }
 
 .row{
   margin:0px !important;
+}
+
+.Center-Container {
+  position: relative;
+  z-index:80;
+}
+
+.Absolute-Center {
+  width: 500px;
+  height: 500px;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  z-index:90
+}
+
+.centered{
+  width:100px;
+  height:100px;
+  margin-top:100px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.loader{
+  width:100px;
+  height:100px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index:99;
 }
 
 
@@ -174,11 +206,11 @@ body{
 
 .score-wrap > li{
   display: inline-block;
-  padding:10px;
+  padding:8px;
   color:white;
   border-radius: 3px;
   margin-right: 5px;
-  width:50px;
+  width:43px;
   text-align: center;
 }
 
