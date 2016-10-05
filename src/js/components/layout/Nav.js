@@ -14,6 +14,17 @@ export default class Nav extends React.Component {
     this.setState({collapsed});
   }
 
+  setActive(value){
+    console.log(this.props.location);
+    if(this.props.location.pathname == value){
+      return "active";
+    }else{
+      return "";
+    }
+  }
+
+
+
   render() {
     const { location } = this.props;
     const { collapsed } = this.state;
@@ -21,6 +32,8 @@ export default class Nav extends React.Component {
     // const archivesClass = location.pathname.match(/^\/archives/) ? "active" : "";
     // const settingsClass = location.pathname.match(/^\/settings/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
+
+    console.log(location);
 
     return (
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -33,9 +46,9 @@ export default class Nav extends React.Component {
             </button>
           </div>
           <div class={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
-            <div class="logo">U-Verse Tomatoes</div>
+            <div class="logo">U-Verse Ratings</div>
             <ul class="nav navbar-nav">
-              <li activeClassName="active" onlyActiveOnIndex={true}>
+              <li class={this.setActive("/")} >
                 <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>U-verse On Demand Movie Ratings</IndexLink>
               </li>
               <li activeClassName="active">
