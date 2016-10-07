@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function fetchMovies(category) {
   return function(dispatch) {
-    axios.get("../../scraped/" + category + ".json")
+    axios.get("../../data/" + category + ".json")
       .then((response) => {
         dispatch({type: "FETCH_MOVIES_FULLFILLED", payload: response.data})
       })
@@ -13,6 +13,8 @@ export function fetchMovies(category) {
 }
 
 export function fetchMovieData(movies, i , limit, res) {
+  console.log(i);
+
   if(i==limit){
     return function(dispatch) {
       dispatch({type: "FETCH_MOVIE_DATA_FULLFILLED", payload: res});

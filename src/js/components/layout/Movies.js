@@ -69,10 +69,14 @@ export default class Movies extends React.Component {
       var mappedMovies = [];
 
       if(!fetching){ //no movie names
-      }else if(!fetched){ //movie names but no data
-        this.fetchMovieData(movies['movies'],0,movies['movies'].length,[]);
       }else{ //All data is good to go, let's map these suckers
         var mappedMovies = [];
+
+        // for(var x=0;x<movieData.length;x++){ //Get rid of the movies that crapped out.
+        //   if(movieData[x].Response == "False"){
+        //     movieData.splice(x,1);
+        //   }
+        // }
 
 
         if(filter=="Average"){
@@ -95,6 +99,7 @@ export default class Movies extends React.Component {
               bScore = parseFloat(b.Metascore);
             }else if(b.Metascore == "N/A"){
               bScore = parseFloat(b.imdbRating)*10;
+              //console.log(a);
             }else{
               bScore = (parseFloat(b.imdbRating)*10 + parseFloat(b.Metascore))/2;
             }
@@ -105,15 +110,16 @@ export default class Movies extends React.Component {
         }
         else if(filter=="IMDB"){
           movieData.sort(function(a,b){
-            var first = b.imdbRating == "N/A" ? 0 : b.imdbRating
-            var second = a.imdbRating == "N/A" ? 0 : a.imdbRating
+            var first = (b.imdbRating == "N/A") ? 0 : parseFloat(b.imdbRating)
+            var second = (a.imdbRating == "N/A") ? 0 : parseFloat(a.imdbRating)
             var sorter = first-second;
+            //console.log(a);console.log(b);
             return sorter;
           })
         }else if(filter=="Metascore"){
           movieData.sort(function(a,b){
-            var first = b.Metascore == "N/A" ? 0 : b.Metascore
-            var second = a.Metascore == "N/A" ? 0 : a.Metascore
+            var first = b.Metascore == "N/A" ? 0 : parseFloat(b.Metascore)
+            var second = a.Metascore == "N/A" ? 0 : parseFloat(a.Metascore)
             var sorter = first-second;
             return sorter;
           })
@@ -222,7 +228,7 @@ export default class Movies extends React.Component {
           </div>
         </div>
         <div class='right-scroll'>
-          {this.loader()}
+          {/* {this.loader()} */}
           <div class='row'>
             {mappedMovies}
           </div>

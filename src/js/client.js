@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import { Provider } from "react-redux"
 
 import Layout from "./pages/Layout";
+import Ratings from "./pages/Ratings";
 import Home from "./pages/Home";
 import store from "./store"
 
@@ -14,6 +15,7 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path="/" component={Layout}>
         <IndexRoute component={Home}></IndexRoute>
+        <Route path="ratings" name="ratings" component={Ratings}></Route>
       </Route>
     </Router>
   </Provider>,
