@@ -10,10 +10,10 @@ var app = express();
 var schedule = require('node-schedule');
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 15;
+rule.minute = 30;
 
 var j = schedule.scheduleJob(rule, function(){
-
+  generateList();
 });
 
 function getInfo(title, callback){
@@ -67,14 +67,3 @@ function generateList(){
       }
   });
 }
-
-
-
-
-
-
-
-
-
-
-generateList();
