@@ -13,7 +13,9 @@ var rule = new schedule.RecurrenceRule();
 rule.minute = 30;
 
 var j = schedule.scheduleJob(rule, function(){
-  generateList();
+  generateList(function(){
+    downloadPictures();
+  });
 });
 
 function getInfo(title, callback){
@@ -40,7 +42,7 @@ function fetch(titles, start, end, results, callback){
   });
 }
 
-function generateList(){
+function generateList(callback){
   var list = []
   fs.readdir("../scraped", function(err, items) {
       console.log(items);
@@ -65,5 +67,33 @@ function generateList(){
 
         });
       }
+  });
+
+  return callback();
+}
+
+function download(url, callback){
+  var filename = url.substring(url.lastIndexOf('/')+1);
+  request.head(url, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(url).pipe(fs.createWriteStream("../posters/" + filename)).on('close', callback);
+  });
+};
+
+
+function downloadPictures(){
+  fs.readFile('../data/All.json', 'utf8', function (err,data) {
+    var json = JSON.parse(data);
+    var movies = json.Movies
+    console.log(movies);
+    for(var i = 0; i<movies.length; i++){
+      if(movies[i].Poster != "N/A" && (movies[i].Poster != undefined)){
+        download(movies[i].Poster, function(){
+
+        });
+      }
+    }
   });
 }

@@ -130,7 +130,8 @@ export default class Movies extends React.Component {
 
         for(var m=0;m<movieData.length;m++){
           if(movieData[m]['Title']){
-            var background = movieData[m]['Poster'] == "N/A" ? {background: "url('../../../ImageNotFound.png')"} : {background: "url(" + movieData[m]['Poster'] + ")"};
+            var image = "../../../posters/" + movieData[m]['Poster'].substring(movieData[m]['Poster'].lastIndexOf('/')+1)
+            var background = movieData[m]['Poster'] == "N/A" ? {background: "url('../../../ImageNotFound.png')"} : {background: "url(" + image + ")"};
 
             //Calculate the average score
             var avgScore = 0;
