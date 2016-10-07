@@ -49,11 +49,14 @@ export default class Nav extends React.Component {
             <div class="logo">U-Verse Ratings</div>
             <ul class="nav navbar-nav">
               <li class={this.setActive("/")} >
-                <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>U-verse On Demand Movie Ratings</IndexLink>
+                <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>Home</IndexLink>
               </li>
-              <li activeClassName="active">
+              <li class={this.setActive("/ratings")} >
+                <IndexLink to="/ratings" onClick={this.toggleCollapse.bind(this)}>U-verse On Demand Movie Ratings</IndexLink>
+              </li>
+              {/* <li activeClassName="active">
                 <Link to="archives" onClick={this.toggleCollapse.bind(this)}>About Us</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 

@@ -196,6 +196,7 @@ export default class Movies extends React.Component {
                                         <p>Rated: {movieData[m]['Rated']}</p>
                                         <p>Released: {movieData[m]['Released']}</p>
                                         <p>Runtime: {movieData[m]['Runtime']}</p>
+                                        <p>Genres: {movieData[m]['Genre']}</p>
 
 
                                       </div>
