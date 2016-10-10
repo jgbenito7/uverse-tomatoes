@@ -5,17 +5,18 @@ $black:rgb(30,30,30);
 $offwhite:#f6f6f6;
 $boldtext:#212121;
 $lime-green:#1CB78C;
-
 $orange: #ef9f00;
 $blue: #00cbef;
 $pink: #b4214f;
-
-
 
 $nav-height:55px;
 $sidebar-width:230px;
 $poster-width:170px;
 $poster-height:280px;
+
+div[class^="col"]{
+  padding:0px;
+}
 
 .col-md-6{
   padding:0px;
@@ -27,21 +28,6 @@ $poster-height:280px;
 
 .row{
   margin:0px !important;
-}
-
-.Center-Container {
-  position: relative;
-  z-index:80;
-}
-
-.Absolute-Center {
-  width: 500px;
-  height: 500px;
-  overflow: auto;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  z-index:90
 }
 
 .centered{
@@ -119,6 +105,17 @@ $poster-height:280px;
   margin:auto;
 }
 
+.navbar-toggle{
+  border-color:black !important;
+}
+
+.navbar-toggle:hover, .navbar-toggle:visited{
+  background: white !important;
+}
+
+.icon-bar{
+  background: black !important;
+}
 
 body{
   overflow-x: hidden;
@@ -158,17 +155,19 @@ body{
 .navbar-nav > li.active, .navbar-nav > li.active > a{
   color:$black !important;
   background: $light-grey !important;
+  border-bottom: 3px solid $lime-green;
 }
 
 .navbar-nav > li > a{
   color:$grey !important;
-  padding: 17px 10px;
+  padding: 16px 10px;
 }
 
 .navbar-nav > li > a:hover{
   color:$black !important;
   background: $light-grey !important;
   cursor: pointer;
+  border-bottom: 3px solid $lime-green;
 }
 
 .main-wrap{
@@ -217,6 +216,7 @@ body{
 
 .right-scroll{
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   height:100%;
   position: relative;
 
@@ -402,6 +402,67 @@ body{
   border-left: 1px solid white;
 }
 
+.posterPic{
+  height:30vh;
+  background-size:cover;
+  background-position: center;
+}
+
+.home-overlay{
+  position: absolute;
+  top:0;
+  left:0;
+  bottom:-20px;
+  width:100%;
+  //height:100%;
+  background:rgba(30,30,30,.8);
+  z-index:900;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.child{
+  width:60%;
+  height:30vh;
+  margin:auto;
+}
+
+.child > h1{
+  color:white;
+  font-size:60px;
+  font-weight: bold;
+  text-shadow: 2px 2px $grey;
+}
+
+.home-button{
+  margin:auto;
+  width:300px;
+  padding:15px;
+  border-radius:3px;
+  text-align:center;
+  color:white;
+  font-size:20px;
+  font-weight:bold;
+  border:3px solid $lime-green;
+  color:$lime-green;
+  margin-top:30px;
+  transition: background .3s linear;
+}
+
+a:hover{
+  text-decoration: none !important;
+}
+
+.home-button:hover{
+  color:white;
+  cursor: pointer;
+  background: $lime-green;
+
+}
 
 @media only screen and (max-width: 1120px) {
     .left-nav-wrapper{

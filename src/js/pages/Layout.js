@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 
 import Nav from "../components/layout/Nav";
 
-require("../../style.scss");
+//require("../../style.scss");
 
 export default class Layout extends React.Component {
   render() {

@@ -8,7 +8,6 @@ import { setFilter } from "../../actions/movieActions"
 
 @connect((store) => {
   return {
-    movies: store.movies.movies,
     movieData: store.movies.movieData,
     category: store.movies.category,
     fetching: store.movies.fetching,
@@ -195,7 +194,7 @@ export default class Movies extends React.Component {
 
                                         <p>Rated: {movieData[m]['Rated']}</p>
                                         <p>Released: {movieData[m]['Released']}</p>
-                                        <p>Runtime: {movieData[m]['Runtime']}</p>
+                                        {/* <p>Runtime: {movieData[m]['Runtime']}</p> */}
                                         <p>Genres: {movieData[m]['Genre']}</p>
 
 
