@@ -107,6 +107,7 @@ div[class^="col"]{
 
 .navbar-toggle{
   border-color:black !important;
+  margin-right:-15px;
 }
 
 .navbar-toggle:hover, .navbar-toggle:visited{
@@ -426,7 +427,7 @@ body{
 }
 
 .child{
-  width:60%;
+  width:800px;
   height:30vh;
   margin:auto;
 }

@@ -27,7 +27,7 @@ export default class Home extends React.Component {
   buildList(fetching, movieData){
     var divs = [];
     if(fetching){
-      for(var x = 0; x<movieData.length; x++){
+      for(var x = 0; x<movieData.length - 70; x++){
 
 
         if(movieData[x]['Poster'] == "N/A" || movieData[x]['Poster'] == undefined){
