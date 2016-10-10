@@ -464,6 +464,10 @@ a:hover{
 
 }
 
+.home{
+  overflow-y: hidden;
+}
+
 @media only screen and (max-width: 1120px) {
     .left-nav-wrapper{
       display: none;
@@ -485,5 +489,17 @@ a:hover{
 
     .hide900{
       display: none;
+    }
+    .child{
+      width:90%;
+
+    }
+    .child > h1{
+      font-size: 30px;
+    }
+    .home-button{
+      width:200px;
+      padding:10px;
+      font-size: 10px;
     }
 }

@@ -59,7 +59,7 @@ export default class Home extends React.Component {
     }
 
     return (
-      <div>
+      <div class='home'>
         <div class='home-overlay'>
           <div class='parent'>
             <div class='child'>
