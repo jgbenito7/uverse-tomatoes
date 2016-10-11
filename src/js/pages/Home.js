@@ -17,7 +17,6 @@ require("../../style.scss");
   };
 })
 
-
 export default class Home extends React.Component {
 
   componentDidMount(){
@@ -28,13 +27,12 @@ export default class Home extends React.Component {
     var divs = [];
     if(fetching){
       for(var x = 0; x<movieData.length - 70; x++){
-
-
         if(movieData[x]['Poster'] == "N/A" || movieData[x]['Poster'] == undefined){
           continue;
         }else{
+          var image = "../../../posters/" + movieData[x]['Poster'].substring(movieData[x]['Poster'].lastIndexOf('/')+1);
           var style = {
-            backgroundImage : "url('" + movieData[x]['Poster'] + "')"
+            backgroundImage : "url('" + image + "')"
           };
           divs.push(
             <div class='col-md-2 col-sm-3 col-xs-4'>
@@ -45,9 +43,7 @@ export default class Home extends React.Component {
       }
       return divs;
     }
-
   }
-
 
   render() {
     const { location, movies, movieData, fetching } = this.props;
@@ -66,24 +62,9 @@ export default class Home extends React.Component {
               <h1>U-Verse On Demand Featured Movie Ratings</h1>
               <a href="#/ratings"><div class='home-button'>Check Ratings</div></a>
             </div>
-
           </div>
-
         </div>
         {this.buildList(fetching, movieData)}
-        {/* <div class='landing-image' style={background}>
-          <div class='overlay' style={overlay}></div>
-          <div class='parent'>
-            <div class='child'><h1>Ratings From The U-Verse Featured Movies</h1></div>
-          </div>
-        </div>
-        <div class='banner'>
-        <ul class='score-wrap banner-scores'>
-          <li class='scoreCard pink'>Average Rating</li>
-          <li class='scoreCard orange'>IMDB Rating</li>
-          <li class='scoreCard blue'></li>
-        </ul>
-        </div> */}
       </div>
     );
   }

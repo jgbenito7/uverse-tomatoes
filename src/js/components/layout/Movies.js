@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import { fetchMovies } from "../../actions/movieActions"
 import { fetchMovieData } from "../../actions/movieActions"
 import { setFilter } from "../../actions/movieActions"
+import { setCategory } from "../../actions/movieActions"
 
 @connect((store) => {
   return {
@@ -18,6 +19,32 @@ import { setFilter } from "../../actions/movieActions"
 })
 
 export default class Movies extends React.Component {
+
+  constructor() {
+    super()
+    this.state = {
+      selected:'All'
+    };
+  }
+
+  isActive(value){
+    if(this.state.selected == value){
+      return "active";
+    }else{
+      return "default";
+    }
+  }
+
+  setSelected(value){
+    //console.log(this)
+     this.setState({
+        selected: value
+      })
+
+      this.props.dispatch(setCategory(value));
+
+   }
+
 
   componentDidMount(){
     this.props.dispatch(fetchMovies(this.props.category));
@@ -46,7 +73,6 @@ export default class Movies extends React.Component {
   }
 
   loader(){
-    //console.log(this.props.fetched);
     var divStyle = {
       backgroundImage: "url('../../../loader.GIF')"
     }
@@ -62,6 +88,20 @@ export default class Movies extends React.Component {
     }
   }
 
+  buildSelectList(){
+    const navElems = ["All", "Action-Adventure", "Comedy", "Drama", "Foreign Films", "Horror", "Independent", "Kids-Family", "Romance", "SciFi-Fantasy", "Suspense-Thriller"]
+
+    const mappedNav = navElems.map(elem =>
+      <div class='col-xs-6 col-sm-4 col-md-3 col-lg-2'>
+        <div class='side-wrap pad5'>
+          <div class={"side-elem center-text margin-top-0 border-1px pad5 border-radius-3 " + this.isActive(elem)} onClick={this.setSelected.bind(this, elem)} ><a>{elem}</a></div>
+        </div>
+      </div>
+    )
+    return mappedNav;
+  }
+
+
   render() {
       const { location,movies, movieData, category, fetching, fetched, filter, loading } = this.props;
 
@@ -70,13 +110,6 @@ export default class Movies extends React.Component {
       if(!fetching){ //no movie names
       }else{ //All data is good to go, let's map these suckers
         var mappedMovies = [];
-
-        // for(var x=0;x<movieData.length;x++){ //Get rid of the movies that crapped out.
-        //   if(movieData[x].Response == "False"){
-        //     movieData.splice(x,1);
-        //   }
-        // }
-
 
         if(filter=="Average"){
           movieData.sort(function(a,b){
@@ -112,7 +145,6 @@ export default class Movies extends React.Component {
             var first = (b.imdbRating == "N/A") ? 0 : parseFloat(b.imdbRating)
             var second = (a.imdbRating == "N/A") ? 0 : parseFloat(a.imdbRating)
             var sorter = first-second;
-            //console.log(a);console.log(b);
             return sorter;
           })
         }else if(filter=="Metascore"){
@@ -123,9 +155,6 @@ export default class Movies extends React.Component {
             return sorter;
           })
         }
-
-
-
 
         for(var m=0;m<movieData.length;m++){
           if(movieData[m]['Title']){
@@ -146,62 +175,47 @@ export default class Movies extends React.Component {
 
             mappedMovies.push(
               <div>
-              <div key={"modal" + m} id={"myModal" + m} class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    {/* <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Modal Header</h4>
-                    </div> */}
-                    <div class="modal-body">
-                      <div class='movie'>
-                        <div class='poster' style={ background }></div>
-                        <div class='movieInfo'>
-                          <h3 class='title'>{movieData[m]['Title']}</h3>
-                          <ul class='score-wrap'>
-                            <li class='scoreCard pink'>{avgScore}</li>
-                            <li class='scoreCard orange'>{movieData[m]['imdbRating']}</li>
-                            <li class='scoreCard blue'>{movieData[m]['Metascore']}</li>
-                          </ul>
-                          <p>Rated: {movieData[m]['Rated']}</p>
-                          <p>Released: {movieData[m]['Released']}</p>
-                          <p>Runtime: {movieData[m]['Runtime']}</p>
+                <div key={"modal" + m} id={"myModal" + m} class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class='movie'>
+                          <div class='poster' style={ background }></div>
+                          <div class='movieInfo'>
+                            <h3 class='title'>{movieData[m]['Title']}</h3>
+                            <ul class='score-wrap'>
+                              <li class='scoreCard pink'>{avgScore}</li>
+                              <li class='scoreCard orange'>{movieData[m]['imdbRating']}</li>
+                              <li class='scoreCard blue'>{movieData[m]['Metascore']}</li>
+                            </ul>
+                            <p>Rated: {movieData[m]['Rated']}</p>
+                            <p>Released: {movieData[m]['Released']}</p>
+                            <p>Runtime: {movieData[m]['Runtime']}</p>
+                          </div>
+                        </div>
+                        <div class='plot'>
+                          <p>{movieData[m]['Plot']}</p>
                         </div>
                       </div>
-                      <div class='plot'>
-                        <p>{movieData[m]['Plot']}</p>
-                      </div>
-
-
                     </div>
-                    {/* <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div> */}
                   </div>
                 </div>
-              </div>
-
-              <div key={m} class='col-sm-6 col-md-6 col-lg-4' onClick={this.toggleModal.bind(this,m.toString())}>
-                                    <div class='movie'>
-                                      <div class='poster' style={ background }></div>
-                                      <div class='movieInfo'>
-                                        <h3 class='title'>{movieData[m]['Title']}</h3>
-                                        <ul class='score-wrap'>
-                                          <li class='scoreCard pink'>{avgScore}</li>
-                                          <li class='scoreCard orange'>{movieData[m]['imdbRating']}</li>
-                                          <li class='scoreCard blue'>{movieData[m]['Metascore']}</li>
-                                        </ul>
-
-                                        <p>Rated: {movieData[m]['Rated']}</p>
-                                        <p>Released: {movieData[m]['Released']}</p>
-                                        {/* <p>Runtime: {movieData[m]['Runtime']}</p> */}
-                                        <p>Genres: {movieData[m]['Genre']}</p>
-
-
-                                      </div>
-                                    </div>
-                                </div>
-
+                <div key={m} class='col-sm-6 col-md-6 col-lg-4' onClick={this.toggleModal.bind(this,m.toString())}>
+                    <div class='movie'>
+                      <div class='poster' style={ background }></div>
+                      <div class='movieInfo'>
+                        <h3 class='title'>{movieData[m]['Title']}</h3>
+                        <ul class='score-wrap'>
+                          <li class='scoreCard pink'>{avgScore}</li>
+                          <li class='scoreCard orange'>{movieData[m]['imdbRating']}</li>
+                          <li class='scoreCard blue'>{movieData[m]['Metascore']}</li>
+                        </ul>
+                        <p>Rated: {movieData[m]['Rated']}</p>
+                        <p>Released: {movieData[m]['Released']}</p>
+                        <p>Genres: {movieData[m]['Genre']}</p>
+                      </div>
+                    </div>
+                </div>
               </div>
             );
           }
@@ -210,6 +224,11 @@ export default class Movies extends React.Component {
 
     return (
       <div className="right-wrapper">
+        <div class='filter-wrap margin-b-10 show900 hide'>
+          <div class='row'>
+            {this.buildSelectList()}
+          </div>
+        </div>
         <div class='filter-wrap'>
           <div class='filter-by-wrap'>
             <div class='row'>
@@ -229,7 +248,6 @@ export default class Movies extends React.Component {
           </div>
         </div>
         <div class='right-scroll'>
-          {/* {this.loader()} */}
           <div class='row'>
             {mappedMovies}
           </div>

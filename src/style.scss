@@ -7,7 +7,7 @@ $boldtext:#212121;
 $lime-green:#1CB78C;
 $orange: #ef9f00;
 $blue: #00cbef;
-$pink: #b4214f;
+$pink: #e7515a;
 
 $nav-height:55px;
 $sidebar-width:230px;
@@ -253,6 +253,7 @@ body{
   padding-top:10px;
   padding-right:10px;
   height:$poster-height;
+  overflow-y: hidden;
 }
 
 
@@ -272,6 +273,7 @@ body{
   margin-right: 5px;
   width:43px;
   text-align: center;
+  margin-top:5px;
 }
 
 .pink{
@@ -436,7 +438,7 @@ body{
   color:white;
   font-size:60px;
   font-weight: bold;
-  text-shadow: 2px 2px $grey;
+  text-shadow: 2px 2px $boldtext;
 }
 
 .home-button{
@@ -469,9 +471,44 @@ a:hover{
   overflow-y: hidden;
 }
 
+.margin-b-10{
+  margin-bottom: 10px;
+}
+
+.center-text{
+  text-align: center;
+}
+
+.pad0{
+  padding:0px;
+}
+
+.margin-top-0{
+  margin-top: 0px;
+}
+
+.border-1px{
+  border:1px solid $grey;
+}
+
+.pad5{
+  padding:5px;
+}
+
+.border-radius-3{
+  border-radius: 3px;
+}
+
+.hide{
+  display:none;
+}
+
 @media only screen and (max-width: 1120px) {
     .left-nav-wrapper{
       display: none;
+    }
+    .show900{
+      display: block !important;
     }
     .right-wrapper{
       left:0px;
@@ -491,6 +528,7 @@ a:hover{
     .hide900{
       display: none;
     }
+
     .child{
       width:90%;
 
